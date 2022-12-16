@@ -1,5 +1,7 @@
+import RootRoutes from "./routes/RootRoutes";
+
 function App() {
-  return <div className="App">Hello</div>;
+  return <RootRoutes />;
 }
 
 export default App;
