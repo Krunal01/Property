@@ -3,11 +3,10 @@ import Header from "../components/Header";
 
 const AuthLayout = ({ children }) => {
   return (
-    <div>
-      {" "}
+    <React.Fragment>
       <Header />
       {children}
-    </div>
+    </React.Fragment>
   );
 };
 

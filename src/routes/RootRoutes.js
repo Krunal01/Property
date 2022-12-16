@@ -15,6 +15,7 @@ function RootRoutes() {
             element={<AuthLayout>{component}</AuthLayout>}
           />
         ))}
+        
         {publicRoutes.map(({ path, component }) => (
           <Route
             key={path}
