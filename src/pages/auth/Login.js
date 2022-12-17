@@ -81,7 +81,7 @@ function Login() {
               controlId="formBasicCheckbox"
             >
               {/* <Form.Check type="checkbox" label="Check me out" /> */}
-              <Form.Text className="text-primary">forgot password ?</Form.Text>
+              <Form.Text className="text-primary">forgot password?</Form.Text>
             </Form.Group>
           </Form>
         </Card.Body>
