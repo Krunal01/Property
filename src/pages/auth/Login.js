@@ -23,10 +23,10 @@ function Login() {
   });
   return (
     <Container className="w-100 h-100 d-flex-column align-item-center justify-content-center">
-      <div className="fs-1 d-flex m-2 font-weight-bolder align-items-center justify-content-first">
+      <div className="fs-1 d-flex m-5 font-weight-bolder align-items-center justify-content-first">
         Welcome to Property Selling
       </div>
-      <Card className="w-50 p-2 d-flex-column align-item-center justify-content-center">
+      <Card className="w-50 p-2 m-5 d-flex-column align-item-center justify-content-center">
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="p-2" controlId="formBasicEmail">
             <Form.Label>Email Address</Form.Label>
@@ -69,9 +69,13 @@ function Login() {
               Login
             </Button>
           </Form.Group>
-          <Form.Group className="p-2" controlId="formBasicCheckbox">
+
+          <Form.Group
+            className="p-2 d-flex justify-content-center align-items-center"
+            controlId="formBasicCheckbox"
+          >
             {/* <Form.Check type="checkbox" label="Check me out" /> */}
-            <Form.Text className="text-blue">forgot password ?</Form.Text>
+            <Form.Text className="text-blue   ">forgot password ?</Form.Text>
           </Form.Group>
         </Form>
       </Card>
