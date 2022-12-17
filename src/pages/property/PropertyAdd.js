@@ -42,9 +42,12 @@ function PropertyAdd() {
     validateOnChange: true,
   });
   return (
-    <Container className="d-flex h-100 align-items-center justify-content-center">
+    <Container className="d-flex-column h-100 m-2 align-items-center justify-content-center">
+      <div className="d-flex p-3 w-50 font-weight-bolder align-items-center justify-content-first">
+        Sale Your Property Here
+      </div>
       <Form className="w-50" onSubmit={formik.handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicEmail" className="p-3">
           <Form.Label>Owner Name</Form.Label>
           <Form.Control
             // name="ownerName"
@@ -63,7 +66,7 @@ function PropertyAdd() {
 
         <Row>
           <Col>
-            <Form.Group className="d-flex-column justify-content-md-center">
+            <Form.Group className="d-flex-column justify-content-md-center p-3">
               <Form.Label>Property Type</Form.Label>
 
               <Form.Select
@@ -88,7 +91,7 @@ function PropertyAdd() {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="formBasicEmail" className="p-3">
               <Form.Label>BHK </Form.Label>
               <Form.Control
                 type="number"
@@ -110,7 +113,7 @@ function PropertyAdd() {
         <Form.Group>
           <Row>
             <Col>
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group controlId="formBasicEmail" className="p-3">
                 <Form.Label>City </Form.Label>
                 <Form.Control
                   type="text"
@@ -128,13 +131,13 @@ function PropertyAdd() {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group controlId="formBasicEmail" className="p-3">
                 <Form.Label>PinCode </Form.Label>
                 <Form.Control
                   type="number"
                   name="pinCode"
                   value={formik.values.pinCode}
-                  placeholder="Enter pincode"
+                  placeholder="Enter PinCode"
                   onChange={formik.handleChange}
                   isInvalid={formik.touched.pinCode && formik.errors.pinCode}
                 />
@@ -148,7 +151,7 @@ function PropertyAdd() {
           </Row>
         </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicEmail" className="p-3">
           <Form.Label>Address</Form.Label>
           <Form.Control
             as="textarea"
@@ -167,7 +170,7 @@ function PropertyAdd() {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="p-3" controlId="formBasicEmail">
           <Form.Label>Description of Your Property</Form.Label>
           <Form.Control
             as="textarea"
@@ -183,10 +186,14 @@ function PropertyAdd() {
             ) : null}
           </Form.Text>
         </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Form.Group className="d-flex">
+          <Button variant="primary" type="submit" className="m-3">
+            Submit
+          </Button>
+          <Button variant="danger" type="reset" className="m-3">
+            Reset
+          </Button>
+        </Form.Group>
       </Form>
     </Container>
   );

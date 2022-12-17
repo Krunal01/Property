@@ -1,4 +1,4 @@
-import { useFormik, validateYupSchema } from "formik";
+import { useFormik } from "formik";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
@@ -9,7 +9,7 @@ function Login() {
       password: "",
     },
     validationSchema: yup.object().shape({
-      emialAddress: yup.string().required("ENter email address"),
+      emialAddress: yup.string().required("Enter email address"),
       password: yup
         .string()
         .min(4, "Too Short!")
