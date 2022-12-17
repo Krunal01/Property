@@ -1,67 +1,6 @@
 {
   "properties": [
     {
-      "id": 1,
-
-      "ownerName": "Saho",
-      "propertyType": "Farm",
-      "bhk": "",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
-    },
-    {
-      "id": 2,
-      "ownerName": "Saho",
-      "propertyType": "House",
-      "bhk": "3",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
-    },
-    {
-      "id": 3,
-      "ownerName": "Saho",
-      "propertyType": "House",
-      "bhk": "3",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
-    },
-    {
-      "id": 4,
-      "ownerName": "Saho",
-      "propertyType": "House",
-      "bhk": "3",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
-    },
-    {
-      "id": 5,
-      "ownerName": "Saho",
-      "propertyType": "House",
-      "bhk": "3",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
-    },
-    {
-      "id": 6,
-      "ownerName": "Saho",
-      "propertyType": "House",
-      "bhk": "3",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
-    },
-    {
       "id": 7,
       "ownerName": "Saho",
       "propertyType": "House",
@@ -70,6 +9,28 @@
       "pinCode": "123456",
       "address": "surat,guj",
       "description": "big house"
+    },
+    {
+      "ownerName": "Hello ",
+      "propertyType": "Home",
+      "bhk": "1",
+      "city": "Surat",
+      "pinCode": 394120,
+      "address": "Shalimar complex, Hanuman mandir",
+      "description": "",
+      "formBasicEmail": "Helloooo",
+      "id": 8
+    },
+    {
+      "ownerName": "hi",
+      "propertyType": "Home",
+      "bhk": 3,
+      "city": "ksb",
+      "pinCode": 125432,
+      "address": "hathuran,appartment",
+      "description": "",
+      "formBasicEmail": "ghar",
+      "id": 9
     }
   ]
 }

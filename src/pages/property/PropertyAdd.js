@@ -4,7 +4,9 @@ import Form from "react-bootstrap/Form";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../../utils/api";
+import { toast } from "react-toastify";
 function PropertyAdd() {
   const formik = useFormik({
     initialValues: {
@@ -38,11 +40,27 @@ function PropertyAdd() {
       propertyType: Yup.string().required("Please select property type"),
       description: Yup.string(),
     }),
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => createProperty(values),
     enableReinitialize: true,
     validateOnChange: true,
   });
 
+  const navigate = useNavigate();
+  const createProperty = async (payload) => {
+    try {
+      const response = await api.post("/properties", payload);
+      if (response.status === 201) {
+        toast.success("Property has been added successfully.");
+        formik.resetForm();
+        navigate("/");
+      }
+    } catch (error) {
+      // console.log(error.message);
+      toast.error("Could not add propety, Please try again.");
+      // toast.error(error?.response?.data?.message || error.message);
+      // toast("data not fetched");
+    }
+  };
   return (
     <Container
       fluid
