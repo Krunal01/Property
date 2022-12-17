@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 function PropertyAdd() {
   const formik = useFormik({
     initialValues: {
@@ -41,6 +42,7 @@ function PropertyAdd() {
     enableReinitialize: true,
     validateOnChange: true,
   });
+
   return (
     <Container
       fluid
@@ -198,12 +200,14 @@ function PropertyAdd() {
                 ) : null}
               </Form.Text>
             </Form.Group>
-            <Form.Group className="d-flex">
+            <Form.Group className="d-flex justify-content-end">
+              <Link to="/">
+                <Button variant="danger" type="reset" className="m-2">
+                  Cancel
+                </Button>
+              </Link>
               <Button variant="primary" type="submit" className="m-2">
-                Submit
-              </Button>
-              <Button variant="danger" type="reset" className="m-2">
-                Reset
+                Add Property
               </Button>
             </Form.Group>
           </Form>
