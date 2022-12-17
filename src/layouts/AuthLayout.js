@@ -3,10 +3,10 @@ import Header from "../components/Header";
 
 const AuthLayout = ({ children }) => {
   return (
-    <React.Fragment>
+    <div className="vh-100">
       <Header />
       {children}
-    </React.Fragment>
+    </div>
   );
 };
 
