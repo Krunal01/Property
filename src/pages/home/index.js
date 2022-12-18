@@ -64,11 +64,11 @@ function Home() {
                 </Card.Text>
                 <Card.Text>{e.description}</Card.Text>
                 <div className="d-flex justify-content-around">
-                  <Link to="/property-edit">
+                  <Link to={`/property-edit/${e.id}`}>
                     <Button
                       variant="warning"
                       onClick={() => {
-                        valueforUpdate(e);
+                        fetchData(e);
                       }}
                     >
                       Update

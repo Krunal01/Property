@@ -6,9 +6,13 @@ import PropertyEdit from "../pages/property/PropertyEdit";
 
 export const privateRoutes = [
   { path: "/", name: "home", component: <Home /> },
-  { path: "/property-add", name: "property add", component: <PropertyAdd /> },
   {
-    path: "/property-edit",
+    path: "/property-add",
+    name: "property add",
+    component: <PropertyAdd />,
+  },
+  {
+    path: "/property-edit/:id",
     name: "property edit",
     component: <PropertyEdit />,
   },

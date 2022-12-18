@@ -4,15 +4,51 @@ import Form from "react-bootstrap/Form";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import Card from "react-bootstrap/Card";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 function PropertyEdit() {
-  const [propertyEdit, setPropertyEdit] = useState();
-  const editProperty = async (id) => {
+  const params = useParams();
+  // const [propertyEdit, setPropertyEdit] = useState({
+  //   ownerName: "",
+  //   propertyType: "",
+  //   bhk: "",
+  //   city: "",
+  //   pinCode: "",
+  //   address: "",
+  //   description: "",
+  // });
+  const fetchData = async () => {
     try {
-      const reply = await api.put(`/properties/${id}`, propertyEdit);
+      // throw new ("hi");
+      const response = await api.get(`/properties/${params.id}`);
+      console.log("====================================");
+      console.log("edit response", response);
+      console.log("====================================");
+      if (response.status === 200) {
+        // setPropertyEdit(response?.data || []);
+        // setPropertyEdit(response.data.ownerName);
+      }
+    } catch (error) {
+      // console.log(error.message);
+      toast.error(error?.response?.data?.message || error.message);
+      // toast("data not fetched");
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const editProperty = async () => {
+    try {
+      const reply = await api.put(`/properties/${params.id}`);
+      console.log("====================================");
+      console.log(reply);
+      console.log("id of reply", reply.id);
+      console.log("====================================");
     } catch (error) {
       console.log(error);
       toast("Property is update");
@@ -54,23 +90,23 @@ function PropertyEdit() {
     enableReinitialize: true,
     validateOnChange: true,
   });
-
+  // formik.setFieldValue();
   const navigate = useNavigate();
-  const createProperty = async (payload) => {
-    try {
-      const response = await api.post("/properties", payload);
-      if (response.status === 201) {
-        toast.success("Property has been added successfully.");
-        formik.resetForm();
-        navigate("/");
-      }
-    } catch (error) {
-      // console.log(error.message);
-      toast.error("Could not add propety, Please try again.");
-      // toast.error(error?.response?.data?.message || error.message);
-      // toast("data not fetched");
-    }
-  };
+  // const createProperty = async (payload) => {
+  //   try {
+  //     const response = await api.post("/properties", payload);
+  //     if (response.status === 201) {
+  //       toast.success("Property has been added successfully.");
+  //       formik.resetForm();
+  //       navigate("/");
+  //     }
+  //   } catch (error) {
+  //     // console.log(error.message);
+  //     toast.error("Could not add propety, Please try again.");
+  //     // toast.error(error?.response?.data?.message || error.message);
+  //     // toast("data not fetched");
+  //   }
+  // };
   return (
     <Container
       fluid
