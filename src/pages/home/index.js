@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row, Toast } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../utils/api";
 // import { properties } from "../../utils/data";
@@ -29,15 +30,22 @@ function Home() {
       const removedData = await api.delete(`/properties/${id}`);
       // setProperties(removedData);
       console.log(removedData);
-      toast.success("Product has been deleted.");
+      toast.success("Property data has been deleted.");
       fetchData();
     } catch (error) {
       console.log(error);
-      toast.error("Data not Removed");
+      toast.error("Property data not deleted");
     }
     console.log(id);
   };
-
+  const valueforUpdate = (id) => {
+    console.log("====================================");
+    console.log(id);
+    console.log("====================================");
+  };
+  // onSubmit: (values) => {
+  //   editProperty(values);
+  // };
   return (
     <Container fluid className="py-3">
       <Row className="gy-3">
@@ -55,7 +63,21 @@ function Home() {
                   Address : {e.address} {e.city} ,{e.pinCode}
                 </Card.Text>
                 <Card.Text>{e.description}</Card.Text>
-                <Button onClick={() => removeEntry(e.id)}>Remove</Button>
+                <div className="d-flex justify-content-around">
+                  <Link to="/property-edit">
+                    <Button
+                      variant="warning"
+                      onClick={() => {
+                        valueforUpdate(e);
+                      }}
+                    >
+                      Update
+                    </Button>
+                  </Link>
+                  <Button variant="danger" onClick={() => removeEntry(e.id)}>
+                    Delete
+                  </Button>
+                </div>
               </Card.Body>
             </Card>
           </Col>

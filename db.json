@@ -1,36 +1,37 @@
 {
   "properties": [
     {
-      "id": 7,
-      "ownerName": "Saho",
-      "propertyType": "House",
-      "bhk": "3",
-      "city": "Surat",
-      "pinCode": "123456",
-      "address": "surat,guj",
-      "description": "big house"
+      "ownerName": "Dixit Parmar",
+      "propertyType": "Home",
+      "bhk": 4,
+      "city": "Kosamba",
+      "pinCode": 394125,
+      "address": "Salimar Complex, ksb",
+      "description": "",
+      "formBasicEmail": "I want to sell my house in 50lakhs.",
+      "id": 10
     },
     {
-      "ownerName": "Hello ",
+      "ownerName": "pk parmar",
+      "propertyType": "Home",
+      "bhk": 5,
+      "city": "Surat",
+      "pinCode": 123321,
+      "address": "Haven444, surat.",
+      "description": "",
+      "formBasicEmail": "bo heavy banglow 6e.",
+      "id": 11
+    },
+    {
+      "ownerName": "1234",
       "propertyType": "Home",
       "bhk": "1",
-      "city": "Surat",
-      "pinCode": 394120,
-      "address": "Shalimar complex, Hanuman mandir",
+      "city": "guj",
+      "pinCode": 123432,
+      "address": "nylon,kumvarda,ksb,mangrol,surat,gujarat,india",
       "description": "",
-      "formBasicEmail": "Helloooo",
-      "id": 8
-    },
-    {
-      "ownerName": "hi",
-      "propertyType": "Home",
-      "bhk": 3,
-      "city": "ksb",
-      "pinCode": 125432,
-      "address": "hathuran,appartment",
-      "description": "",
-      "formBasicEmail": "ghar",
-      "id": 9
+      "formBasicEmail": "emj checking krva",
+      "id": 12
     }
   ]
 }

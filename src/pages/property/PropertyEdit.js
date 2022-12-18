@@ -7,7 +7,17 @@ import Card from "react-bootstrap/Card";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
-function PropertyAdd() {
+import { useState } from "react";
+function PropertyEdit() {
+  const [propertyEdit, setPropertyEdit] = useState();
+  const editProperty = async (id) => {
+    try {
+      const reply = await api.put(`/properties/${id}`, propertyEdit);
+    } catch (error) {
+      console.log(error);
+      toast("Property is update");
+    }
+  };
   const formik = useFormik({
     initialValues: {
       ownerName: "",
@@ -40,7 +50,7 @@ function PropertyAdd() {
       propertyType: Yup.string().required("Please select property type"),
       description: Yup.string(),
     }),
-    onSubmit: (values) => createProperty(values),
+    onSubmit: (values) => editProperty(values),
     enableReinitialize: true,
     validateOnChange: true,
   });
@@ -60,9 +70,6 @@ function PropertyAdd() {
       // toast.error(error?.response?.data?.message || error.message);
       // toast("data not fetched");
     }
-  };
-  const updateProperty = (e) => {
-    console.log(e);
   };
   return (
     <Container
@@ -222,13 +229,13 @@ function PropertyAdd() {
               </Form.Text>
             </Form.Group>
             <Form.Group className="d-flex justify-content-end">
-              <Link to="/">
+              {/* <Link to="/">
                 <Button variant="danger" type="reset" className="m-2">
                   Cancel
                 </Button>
-              </Link>
+              </Link> */}
               <Button variant="primary" type="submit" className="m-2">
-                Add Property
+                Edit Property
               </Button>
             </Form.Group>
           </Form>
@@ -238,4 +245,4 @@ function PropertyAdd() {
   );
 }
 
-export default PropertyAdd;
+export default PropertyEdit;
