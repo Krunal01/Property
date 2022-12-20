@@ -2,7 +2,7 @@
   "properties": [
     {
       "ownerName": "Dixit Parmar",
-      "propertyType": "Home",
+      "propertyType": "home",
       "bhk": 4,
       "city": "Kosamba",
       "pinCode": 394125,
@@ -13,7 +13,7 @@
     },
     {
       "ownerName": "pk parmar",
-      "propertyType": "Home",
+      "propertyType": "home",
       "bhk": 5,
       "city": "Surat",
       "pinCode": 123321,
@@ -24,7 +24,7 @@
     },
     {
       "ownerName": "1234",
-      "propertyType": "Home",
+      "propertyType": "home",
       "bhk": "1",
       "city": "guj",
       "pinCode": 123432,
@@ -32,6 +32,28 @@
       "description": "",
       "formBasicEmail": "emj checking krva",
       "id": 12
+    },
+    {
+      "ownerName": "hi",
+      "propertyType": "farm",
+      "bhk": "1",
+      "city": "surat",
+      "pinCode": 123454,
+      "address": "dlknlkdnlskdnlk",
+      "description": "",
+      "formBasicEmail": "write",
+      "id": 13
+    },
+    {
+      "ownerName": "hi",
+      "propertyType": "farm",
+      "bhk": "1",
+      "city": "Surat",
+      "pinCode": 394120,
+      "address": "kim------------",
+      "description": "",
+      "formBasicEmail": "ok......",
+      "id": 14
     }
   ]
 }

@@ -8,6 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { PROPERTY_TYPES } from "../../utils/data";
 
 function PropertyEdit() {
   const params = useParams();
@@ -30,6 +31,7 @@ function PropertyEdit() {
       if (response.status === 200) {
         // setPropertyEdit(response?.data || []);
         // setPropertyEdit(response.data.ownerName);
+        formik.setValues(response.data);
       }
     } catch (error) {
       // console.log(error.message);
@@ -39,6 +41,9 @@ function PropertyEdit() {
   };
 
   useEffect(() => {
+    // formik.setValues({
+    //   ownerName: "",
+    // });
     fetchData();
   }, []);
 
@@ -87,6 +92,7 @@ function PropertyEdit() {
       description: Yup.string(),
     }),
     onSubmit: (values) => editProperty(values),
+
     enableReinitialize: true,
     validateOnChange: true,
   });
@@ -124,6 +130,7 @@ function PropertyEdit() {
                 // name="ownerName"
                 // onChange={formik.handleChange}
                 isInvalid={formik.touched.ownerName && formik.errors.ownerName}
+                // {...formik.setFieldValue(params.ownerName)}
                 {...formik.getFieldProps("ownerName")}
                 type="text"
                 placeholder="Enter Name"
@@ -146,11 +153,16 @@ function PropertyEdit() {
                     }
                     name="propertyType"
                     onChange={formik.handleChange}
+                    value={formik.values.propertyType}
                   >
                     <option>select property</option>
-                    <option>Home</option>
-                    {/* <option>Farm</option>
-                  <option>Plot</option> */}
+                    {PROPERTY_TYPES.map(({ label, value }) => (
+                      
+                      <option value={value}>{label}</option>
+                    ))}
+                    {/* <option value={"Home"}>Home</option>
+                    <option value={"Farm"}>Farm</option>
+                    <option value={"Plot"}>Plot</option> */}
                   </Form.Select>
                   <Form.Text className="text-danger">
                     {formik.touched.propertyType &&

@@ -71,3 +71,18 @@ export const properties = [
     description: "big house",
   },
 ];
+
+export const PROPERTY_TYPES = [
+  {
+    label: "House",
+    value: "home",
+  },
+  {
+    label: "Farm",
+    value: "farm",
+  },
+  {
+    label: "Plot",
+    value: "plot",
+  },
+];

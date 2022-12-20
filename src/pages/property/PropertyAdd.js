@@ -7,6 +7,9 @@ import Card from "react-bootstrap/Card";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
+import { PROPERTY_TYPES } from "../../utils/data";
+import { useEffect } from "react";
+import axios from "axios";
 function PropertyAdd() {
   const formik = useFormik({
     initialValues: {
@@ -24,10 +27,16 @@ function PropertyAdd() {
         .max(50, "Too Long!")
         .required("Please Enter Name "),
       propertyType: Yup.string().required("Please select property type"),
-      bhk: Yup.number()
-        .min(1, "please ente valid bhk")
-        .max(50, "please ente valid bhk")
-        .required("Please enter bhk"),
+      bhk: Yup.number().when("propertyType", {
+        is: (type) => {
+          console.log(type);
+
+          return type == "plot" || type == "farm";
+        },
+        then: Yup.number(),
+        otherwise: Yup.number(),
+      }),
+
       city: Yup.string().required("Please enter your city"),
       pinCode: Yup.string()
         .min(6, "please ente valid number")
@@ -44,6 +53,24 @@ function PropertyAdd() {
     enableReinitialize: true,
     validateOnChange: true,
   });
+  async function getCityDetails(pinCode) {
+    try {
+      const response = await axios.get(
+        `https://api.postalpincode.in/pincode/${pinCode}`
+      );
+      console.log(response);
+      formik.setFieldValue("city", response.data[0].PostOffice[0].Division);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    console.log(formik.values.pinCode);
+    if (formik.values.pinCode.toString().length === 6) {
+      console.log("====================================");
+      getCityDetails(formik.values.pinCode);
+    }
+  }, [formik.values.pinCode]);
 
   const navigate = useNavigate();
   const createProperty = async (payload) => {
@@ -105,9 +132,12 @@ function PropertyAdd() {
                     onChange={formik.handleChange}
                   >
                     <option>select property</option>
-                    <option>Home</option>
-                    {/* <option>Farm</option>
-                  <option>Plot</option> */}
+                    {PROPERTY_TYPES.map(({ label, value }) => (
+                      <option value={value}>{label}</option>
+                    ))}
+                    {/* <option>Home</option>
+                    <option>Farm</option>
+                    <option>Plot</option> */}
                   </Form.Select>
                   <Form.Text className="text-danger">
                     {formik.touched.propertyType &&
@@ -120,22 +150,47 @@ function PropertyAdd() {
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group controlId="formBasicEmail" className="p-2">
-                  <Form.Label>BHK </Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="Enter BHK"
-                    name="bhk"
-                    value={formik.values.bhk}
-                    onChange={formik.handleChange}
-                    isInvalid={formik.touched.bhk && formik.errors.bhk}
-                  />
-                  <Form.Text className="text-danger">
-                    {formik.touched.bhk && formik.errors.bhk ? (
-                      <div className="text-danger">{formik.errors.bhk}</div>
-                    ) : null}
-                  </Form.Text>
-                </Form.Group>
+                {formik.values.propertyType === "farm" ? (
+                  <Form.Group controlId="formBasicEmail" className="p-2">
+                    <Form.Label>Servey Number </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter BHK"
+                      name="servey_number"
+                      value={formik.values.servey_number}
+                      onChange={formik.handleChange}
+                      isInvalid={
+                        formik.touched.servey_number &&
+                        formik.errors.servey_number
+                      }
+                    />
+                    <Form.Text className="text-danger">
+                      {formik.touched.servey_number &&
+                      formik.errors.servey_number ? (
+                        <div className="text-danger">
+                          {formik.errors.servey_number}
+                        </div>
+                      ) : null}
+                    </Form.Text>
+                  </Form.Group>
+                ) : (
+                  <Form.Group controlId="formBasicEmail" className="p-2">
+                    <Form.Label>BHK </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter BHK"
+                      name="bhk"
+                      value={formik.values.bhk}
+                      onChange={formik.handleChange}
+                      isInvalid={formik.touched.bhk && formik.errors.bhk}
+                    />
+                    <Form.Text className="text-danger">
+                      {formik.touched.bhk && formik.errors.bhk ? (
+                        <div className="text-danger">{formik.errors.bhk}</div>
+                      ) : null}
+                    </Form.Text>
+                  </Form.Group>
+                )}
               </Col>
             </Row>
 
