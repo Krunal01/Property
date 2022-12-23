@@ -1,28 +1,6 @@
 {
   "properties": [
     {
-      "ownerName": "Dixit Parmar",
-      "propertyType": "home",
-      "bhk": 4,
-      "city": "Kosamba",
-      "pinCode": 394125,
-      "address": "Salimar Complex, ksb",
-      "description": "",
-      "formBasicEmail": "I want to sell my house in 50lakhs.",
-      "id": 10
-    },
-    {
-      "ownerName": "1234",
-      "propertyType": "home",
-      "bhk": "1",
-      "city": "guj",
-      "pinCode": 123432,
-      "address": "nylon,kumvarda,ksb,mangrol,surat,gujarat,india",
-      "description": "",
-      "formBasicEmail": "emj checking krva",
-      "id": 12
-    },
-    {
       "ownerName": "hi",
       "propertyType": "farm",
       "bhk": "1",
@@ -43,6 +21,18 @@
       "description": "",
       "formBasicEmail": "ok......",
       "id": 14
+    },
+    {
+      "ownerName": "kp",
+      "propertyType": "home",
+      "bhk": 2,
+      "city": "Surat",
+      "pinCode": 394120,
+      "address": "nylon colony ",
+      "addressline1": "nylon colony ",
+      "addressline2": "nylon colony ",
+      "description": "",
+      "id": 15
     }
   ]
 }

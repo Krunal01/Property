@@ -19,6 +19,8 @@ function PropertyAdd() {
       city: "",
       pinCode: "",
       address: "",
+      addressline1: "",
+      addressline2: "",
       description: "",
     },
     validationSchema: Yup.object().shape({
@@ -46,6 +48,14 @@ function PropertyAdd() {
         .min(10, "Enter address")
         .max(255, "Enter address")
         .required("Please Enter address "),
+      addressline1: Yup.string()
+        .min(10, "Enter address")
+        .max(255, "Enter address")
+        .required("Please Enter address "),
+      addressline2: Yup.string()
+        .min(10, "Enter address")
+        .max(255, "Enter address")
+        .required("Please Enter address "),
       propertyType: Yup.string().required("Please select property type"),
       description: Yup.string(),
     }),
@@ -60,6 +70,11 @@ function PropertyAdd() {
       );
       console.log(response);
       formik.setFieldValue("city", response.data[0].PostOffice[0].Division);
+      // formik.setFieldValue("addressline1", response.data[0].PostOffice[1].Name);
+      // formik.setFieldValue(
+      //   "addressline2",
+      //   response.data[0].PostOffice[0].Circle
+      // );
     } catch (error) {
       console.log(error);
     }
@@ -191,6 +206,8 @@ function PropertyAdd() {
                     </Form.Text>
                   </Form.Group>
                 )}
+
+                {/* </Row> */}
               </Col>
             </Row>
 
@@ -258,6 +275,51 @@ function PropertyAdd() {
               </Form.Text>
             </Form.Group>
 
+            {/* <Row > */}
+            {/* <Form.Group controlId="formBasicEmail" className="p-2 w-100"> */}
+            <Form.Group controlId="formBasicEmail" className="p-2">
+              <Form.Label>Address Line 1 </Form.Label>
+              <Form.Control
+                as="textarea"
+                name="addressline1"
+                value={formik.values.addressline1}
+                aria-label="With textarea"
+                placeholder="Enter Address"
+                onChange={formik.handleChange}
+                isInvalid={
+                  formik.touched.addressline1 && formik.errors.addressline1
+                }
+              />
+              <Form.Text className="text-danger">
+                {formik.touched.addressline1 && formik.errors.addressline1 ? (
+                  <div className="text-danger">
+                    {formik.errors.addressline1}
+                  </div>
+                ) : null}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail" className="p-2">
+              <Form.Label>Address Line 2 </Form.Label>
+              <Form.Control
+                as="textarea"
+                name="addressline2"
+                value={formik.values.addressline2}
+                aria-label="With textarea"
+                placeholder="Enter Address"
+                onChange={formik.handleChange}
+                isInvalid={
+                  formik.touched.addressline2 && formik.errors.addressline2
+                }
+              />
+              <Form.Text className="text-danger">
+                {formik.touched.addressline2 && formik.errors.addressline2 ? (
+                  <div className="text-danger">
+                    {formik.errors.addressline2}
+                  </div>
+                ) : null}
+              </Form.Text>
+            </Form.Group>
+
             <Form.Group className="p-2" controlId="formBasicEmail">
               <Form.Label>Description of Your Property</Form.Label>
               <Form.Control
@@ -275,7 +337,9 @@ function PropertyAdd() {
                   <div className="text-danger">{formik.errors.description}</div>
                 ) : null}
               </Form.Text>
+              {/* </Form.Group> */}
             </Form.Group>
+
             <Form.Group className="d-flex justify-content-end">
               <Link to="/">
                 <Button variant="danger" type="reset" className="m-2">
