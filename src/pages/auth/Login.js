@@ -24,17 +24,18 @@ function Login() {
   return (
     <Container
       fluid
-      className="w-100 h-100 d-flex align-items-center justify-content-center"
+      className="w-100 h-100 d-flex align-items-center justify-content-center "
     >
-      <Card className="w-50 p-2 m-2 ">
-        <Card.Header>
+      <Card className="w-50  shadow border-0 bg-white rounded t-0">
+        {/* <Card.Header className="d-flex align-items-center justify-content-center bg-white">
           <Card.Title>Login</Card.Title>
-        </Card.Header>
+        </Card.Header> */}
         <Card.Body>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group className="p-2" controlId="formBasicEmail">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
+                size="md"
                 type="email"
                 placeholder="Enter email"
                 //   name="emailAddress"
@@ -55,6 +56,7 @@ function Login() {
             <Form.Group className="p-2" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
+                size="md"
                 type="password"
                 placeholder="Enter password"
                 isInvalid={formik.touched.password && formik.errors.password}
@@ -67,21 +69,23 @@ function Login() {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="d-flex justify-content-between pt-3">
-              <Button variant="success" type="submit" className="m-2 w-50">
-                Create New Account
-              </Button>
-              <Button variant="primary" type="submit" className="m-2 w-50">
+            <Form.Group className="d-flex justify-content-center pt-3 ">
+              <Button variant="primary" type="submit" className="m-2 p-2 w-100">
                 Login
               </Button>
             </Form.Group>
-
+            <Form.Text className="text-primary d-flex justify-content-center cursor-pointer">
+              Forgotten Password?
+            </Form.Text>
+            <hr></hr>
             <Form.Group
-              className="p-2 d-flex justify-content-center align-items-center"
+              className="p-2  d-flex justify-content-center align-items-center"
               controlId="formBasicCheckbox"
             >
+              <Button variant="success" type="submit" className="p-2 w-100">
+                Create New Account
+              </Button>
               {/* <Form.Check type="checkbox" label="Check me out" /> */}
-              <Form.Text className="text-primary">forgot password?</Form.Text>
             </Form.Group>
           </Form>
         </Card.Body>
