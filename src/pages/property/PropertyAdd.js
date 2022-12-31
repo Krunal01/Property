@@ -15,12 +15,14 @@ function PropertyAdd() {
     initialValues: {
       ownerName: "",
       propertyType: "",
+      servey_number: "",
       bhk: "1",
       city: "",
       pinCode: "",
       address: "",
       addressline1: "",
       addressline2: "",
+      documents: "",
       description: "",
     },
     validationSchema: Yup.object().shape({
@@ -37,6 +39,15 @@ function PropertyAdd() {
         },
         then: Yup.number(),
         otherwise: Yup.number(),
+      }),
+      servey_number: Yup.string().when("propertyType", {
+        is: (type) => {
+          console.log(type);
+
+          return type == "plot" || type == "farm";
+        },
+        then: Yup.string(),
+        otherwise: Yup.string(),
       }),
 
       city: Yup.string().required("Please enter your city"),
@@ -57,6 +68,9 @@ function PropertyAdd() {
         .max(255, "Enter address")
         .required("Please Enter address "),
       propertyType: Yup.string().required("Please select property type"),
+      documents: Yup.mixed().required(
+        "Please enter property's documents or photos"
+      ),
       description: Yup.string(),
     }),
     onSubmit: (values) => createProperty(values),
@@ -169,8 +183,8 @@ function PropertyAdd() {
                   <Form.Group controlId="formBasicEmail" className="p-2">
                     <Form.Label>Servey Number </Form.Label>
                     <Form.Control
-                      type="number"
-                      placeholder="Enter BHK"
+                      type="text"
+                      placeholder="Enter Servey Number"
                       name="servey_number"
                       value={formik.values.servey_number}
                       onChange={formik.handleChange}
@@ -320,6 +334,31 @@ function PropertyAdd() {
               </Form.Text>
             </Form.Group>
 
+            <Form.Group className="p-2" controlId="formBasicEmail">
+              <Form.Label>Documents or Photos of Your Property</Form.Label>
+              <Form.Control
+                type="file"
+                name="documents"
+                value={formik.values.documents}
+                placeholder="Max Size 15"
+                onChange={formik.handleChange}
+                isInvalid={formik.touched.documents && formik.errors.documents}
+                // as="textarea"
+                // aria-label="With textarea"
+                // placeholder="Write Here"
+                // onChange={formik.handleChange}
+                // isInvalid={
+                //   formik.touched.description && formik.errors.description
+                // }
+              />
+              {/* <Form.Control type="" placeholder="Enter description" /> */}
+              <Form.Text className="text-danger">
+                {formik.touched.description && formik.errors.description ? (
+                  <div className="text-danger">{formik.errors.description}</div>
+                ) : null}
+              </Form.Text>
+              {/* </Form.Group> */}
+            </Form.Group>
             <Form.Group className="p-2" controlId="formBasicEmail">
               <Form.Label>Description of Your Property</Form.Label>
               <Form.Control

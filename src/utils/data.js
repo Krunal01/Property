@@ -85,4 +85,12 @@ export const PROPERTY_TYPES = [
     label: "Plot",
     value: "plot",
   },
+  {
+    label: "Appartment",
+    value: "appartment",
+  },
+  {
+    label: "Shop",
+    value: "shop",
+  },
 ];
