@@ -45,13 +45,14 @@ function PropertyEdit() {
     fetchData();
   }, []);
 
-  const editProperty = async () => {
+  const editProperty = async (payload) => {
     try {
-      const reply = await api.put(`/properties/${params.id}`);
+      const reply = await api.put(`/properties/${params.id}`, payload);
       console.log("====================================");
       console.log(reply);
       console.log("id of reply", reply.id);
       console.log("====================================");
+      navigate("/");
     } catch (error) {
       console.log(error);
       toast("Property is update");
@@ -133,27 +134,27 @@ function PropertyEdit() {
       ),
       description: Yup.string(),
     }),
-    onSubmit: (values) => createProperty(values),
+    onSubmit: (values) => editProperty(values),
     enableReinitialize: true,
     validateOnChange: true,
   });
   // formik.setFieldValue();
   const navigate = useNavigate();
-  const createProperty = async (payload) => {
-    try {
-      const response = await api.post("/properties", payload);
-      if (response.status === 201) {
-        toast.success("Property has been added successfully.");
-        formik.resetForm();
-        navigate("/");
-      }
-    } catch (error) {
-      // console.log(error.message);
-      toast.error("Could not add propety, Please try again.");
-      // toast.error(error?.response?.data?.message || error.message);
-      // toast("data not fetched");
-    }
-  };
+  // const createProperty = async (payload) => {
+  //   try {
+  //     const response = await api.post("/properties", payload);
+  //     if (response.status === 201) {
+  //       toast.success("Property has been added successfully.");
+  //       formik.resetForm();
+  //       navigate("/");
+  //     }
+  //   } catch (error) {
+  //     // console.log(error.message);
+  //     toast.error("Could not add propety, Please try again.");
+  //     // toast.error(error?.response?.data?.message || error.message);
+  //     // toast("data not fetched");
+  //   }
+  // };
   return (
     <Container
       fluid
@@ -215,87 +216,70 @@ function PropertyEdit() {
                 </Form.Group>
               </Col>
               <Row />
-              <Row>
-                <Col>
-                  <ExtraField
-                    propertyType={formik.values.propertyType}
-                    formik={formik}
-                  />
 
-                  <Form.Group controlId="formBasicEmail" className="p-2">
-                    <Form.Label>Measurements </Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter measurements"
-                      name="measurements"
-                      value={formik.values.measurements}
-                      min="0"
-                      onChange={formik.handleChange}
-                      isInvalid={
-                        formik.touched.measurements &&
-                        formik.errors.measurements
-                      }
-                    />
-                    <Form.Text className="text-danger">
-                      {formik.touched.measurements &&
-                      formik.errors.measurements ? (
-                        <div className="text-danger">
-                          {formik.errors.measurements}
-                        </div>
-                      ) : null}
-                    </Form.Text>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <></>
+              {/* <Row> */}
               <Col>
+                <ExtraField
+                  propertyType={formik.values.propertyType}
+                  formik={formik}
+                />
+
                 <Form.Group controlId="formBasicEmail" className="p-2">
-                  <Form.Label>BHK </Form.Label>
+                  <Form.Label>Measurements </Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Enter BHK"
-                    name="bhk"
-                    value={formik.values.bhk}
+                    placeholder="Enter measurements"
+                    name="measurements"
+                    value={formik.values.measurements}
+                    min="0"
                     onChange={formik.handleChange}
-                    isInvalid={formik.touched.bhk && formik.errors.bhk}
+                    isInvalid={
+                      formik.touched.measurements && formik.errors.measurements
+                    }
                   />
                   <Form.Text className="text-danger">
-                    {formik.touched.bhk && formik.errors.bhk ? (
-                      <div className="text-danger">{formik.errors.bhk}</div>
+                    {formik.touched.measurements &&
+                    formik.errors.measurements ? (
+                      <div className="text-danger">
+                        {formik.errors.measurements}
+                      </div>
                     ) : null}
                   </Form.Text>
                 </Form.Group>
+                {/* </Row> */}
+                <Form.Group className="p-2" controlId="formBasicEmail">
+                  {/* <Row> */}
+                  <Form.Label>Documents or Photos of Your Property</Form.Label>
+                  <Form.Control
+                    type="file"
+                    name="documents"
+                    // value={formik.values.documents}
+                    placeholder="Max Size 15"
+                    onChange={formik.handleChange}
+                    isInvalid={
+                      formik.touched.documents && formik.errors.documents
+                    }
+                    // as="textarea"
+                    // aria-label="With textarea"
+                    // placeholder="Write Here"
+                    // onChange={formik.handleChange}
+                    // isInvalid={
+                    //   formik.touched.description && formik.errors.description
+                    // }
+                  />
+                  {/* <Form.Control type="" placeholder="Enter description" /> */}
+                  <Form.Text className="text-danger">
+                    {formik.touched.documents && formik.errors.documents ? (
+                      <div className="text-danger">
+                        {formik.errors.documents}
+                      </div>
+                    ) : null}
+                  </Form.Text>
+                  {/* </Row> */}
+                  {/* </Form.Group> */}
+                </Form.Group>
               </Col>
             </Row>
-            <Form.Group className="p-2" controlId="formBasicEmail">
-              <Row>
-                <Form.Label>Documents or Photos of Your Property</Form.Label>
-                <Form.Control
-                  type="file"
-                  name="documents"
-                  // value={formik.values.documents}
-                  placeholder="Max Size 15"
-                  onChange={formik.handleChange}
-                  isInvalid={
-                    formik.touched.documents && formik.errors.documents
-                  }
-                  // as="textarea"
-                  // aria-label="With textarea"
-                  // placeholder="Write Here"
-                  // onChange={formik.handleChange}
-                  // isInvalid={
-                  //   formik.touched.description && formik.errors.description
-                  // }
-                />
-                {/* <Form.Control type="" placeholder="Enter description" /> */}
-                <Form.Text className="text-danger">
-                  {formik.touched.documents && formik.errors.documents ? (
-                    <div className="text-danger">{formik.errors.documents}</div>
-                  ) : null}
-                </Form.Text>
-                {/* </Form.Group> */}
-              </Row>
-            </Form.Group>
             <Form.Group>
               <Row>
                 <Col>
@@ -437,3 +421,24 @@ function PropertyEdit() {
 }
 
 export default PropertyEdit;
+<></>;
+{
+  /* <Col>
+                <Form.Group controlId="formBasicEmail" className="p-2">
+                  <Form.Label>BHK </Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter BHK"
+                    name="bhk"
+                    value={formik.values.bhk}
+                    onChange={formik.handleChange}
+                    isInvalid={formik.touched.bhk && formik.errors.bhk}
+                  />
+                  <Form.Text className="text-danger">
+                    {formik.touched.bhk && formik.errors.bhk ? (
+                      <div className="text-danger">{formik.errors.bhk}</div>
+                    ) : null}
+                  </Form.Text>
+                </Form.Group>
+              </Col> */
+}

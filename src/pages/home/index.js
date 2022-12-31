@@ -51,7 +51,7 @@ function Home() {
       <Row className="gy-3">
         {properties.map((e) => (
           <Col xs="12" sm="6" md="4" lg="3" xl="3" xxl="3" key={e.id}>
-            <Card>
+            <Card className="d-flex align-items-stretch h-100">
               <Card.Header>
                 {e.propertyType} {e.bhk && `| ${e.bhk} BHK`}
               </Card.Header>

@@ -35,21 +35,18 @@
       "id": 15
     },
     {
-      "ownerName": "kuns",
-      "propertyType": "appartment",
-      "servey_number": "",
-      "bhk": 3,
-      "floor": 3,
-      "measurements": 3,
+      "id": 16,
+      "ownerName": "KUNS",
+      "propertyType": "plot",
+      "servey_number": 109,
+      "measurements": 12,
+      "documents": "C:\\fakepath\\BingImageOfTheDay_20211109.jpg",
       "city": "Surat",
       "pinCode": 394120,
-      "address": "appartment number ,kosamba",
-      "addressline1": "appartment number ,kosamba",
-      "addressline2": "appartment number ,kosamba",
-      "documents": "C:\\fakepath\\BingImageOfTheDay.jpg",
-      "description": "",
-      "formBasicEmail": "done",
-      "id": 16
+      "address": "KOSAMBAKOSAMBAKOSAMBA",
+      "addressline1": "GUJARATGUJARATGUJARAT",
+      "addressline2": "INDIAINDIAINDIA",
+      "formBasicEmail": "HELLO EDITOR"
     }
   ]
 }
