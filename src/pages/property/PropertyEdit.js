@@ -9,6 +9,7 @@ import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { PROPERTY_TYPES } from "../../utils/data";
+import ExtraField from "../../components/ExtraField";
 
 function PropertyEdit() {
   const params = useParams();
@@ -41,9 +42,6 @@ function PropertyEdit() {
   };
 
   useEffect(() => {
-    // formik.setValues({
-    //   ownerName: "",
-    // });
     fetchData();
   }, []);
 
@@ -63,10 +61,16 @@ function PropertyEdit() {
     initialValues: {
       ownerName: "",
       propertyType: "",
+      servey_number: "",
       bhk: "1",
+      floor: "1",
+      measurements: "0",
       city: "",
       pinCode: "",
       address: "",
+      addressline1: "",
+      addressline2: "",
+      documents: "",
       description: "",
     },
     validationSchema: Yup.object().shape({
@@ -75,10 +79,37 @@ function PropertyEdit() {
         .max(50, "Too Long!")
         .required("Please Enter Name "),
       propertyType: Yup.string().required("Please select property type"),
-      bhk: Yup.number()
-        .min(1, "please ente valid bhk")
-        .max(50, "please ente valid bhk")
-        .required("Please enter bhk"),
+      bhk: Yup.number().when("propertyType", {
+        is: (type) => {
+          console.log(type);
+
+          return type == "plot" || type == "farm";
+        },
+        then: Yup.number(),
+        otherwise: Yup.number(),
+      }),
+      floor: Yup.number().when("propertyType", {
+        is: (type) => {
+          console.log(type);
+
+          return type == "plot" || type == "farm";
+        },
+        then: Yup.number(),
+        otherwise: Yup.number(),
+      }),
+      measurements: Yup.number()
+        // .min(0)
+        .required("Please enter measurements of property"),
+      servey_number: Yup.string().when("propertyType", {
+        is: (type) => {
+          console.log(type);
+
+          return type == "plot" || type == "farm";
+        },
+        then: Yup.string(),
+        otherwise: Yup.string(),
+      }),
+
       city: Yup.string().required("Please enter your city"),
       pinCode: Yup.string()
         .min(6, "please ente valid number")
@@ -88,31 +119,41 @@ function PropertyEdit() {
         .min(10, "Enter address")
         .max(255, "Enter address")
         .required("Please Enter address "),
+      addressline1: Yup.string()
+        .min(10, "Enter address")
+        .max(255, "Enter address")
+        .required("Please Enter address "),
+      addressline2: Yup.string()
+        .min(10, "Enter address")
+        .max(255, "Enter address")
+        .required("Please Enter address "),
       propertyType: Yup.string().required("Please select property type"),
+      documents: Yup.mixed().required(
+        "Please enter property's documents or photos"
+      ),
       description: Yup.string(),
     }),
-    onSubmit: (values) => editProperty(values),
-
+    onSubmit: (values) => createProperty(values),
     enableReinitialize: true,
     validateOnChange: true,
   });
   // formik.setFieldValue();
   const navigate = useNavigate();
-  // const createProperty = async (payload) => {
-  //   try {
-  //     const response = await api.post("/properties", payload);
-  //     if (response.status === 201) {
-  //       toast.success("Property has been added successfully.");
-  //       formik.resetForm();
-  //       navigate("/");
-  //     }
-  //   } catch (error) {
-  //     // console.log(error.message);
-  //     toast.error("Could not add propety, Please try again.");
-  //     // toast.error(error?.response?.data?.message || error.message);
-  //     // toast("data not fetched");
-  //   }
-  // };
+  const createProperty = async (payload) => {
+    try {
+      const response = await api.post("/properties", payload);
+      if (response.status === 201) {
+        toast.success("Property has been added successfully.");
+        formik.resetForm();
+        navigate("/");
+      }
+    } catch (error) {
+      // console.log(error.message);
+      toast.error("Could not add propety, Please try again.");
+      // toast.error(error?.response?.data?.message || error.message);
+      // toast("data not fetched");
+    }
+  };
   return (
     <Container
       fluid
@@ -157,7 +198,6 @@ function PropertyEdit() {
                   >
                     <option>select property</option>
                     {PROPERTY_TYPES.map(({ label, value }) => (
-                      
                       <option value={value}>{label}</option>
                     ))}
                     {/* <option value={"Home"}>Home</option>
@@ -174,6 +214,40 @@ function PropertyEdit() {
                   </Form.Text>
                 </Form.Group>
               </Col>
+              <Row />
+              <Row>
+                <Col>
+                  <ExtraField
+                    propertyType={formik.values.propertyType}
+                    formik={formik}
+                  />
+
+                  <Form.Group controlId="formBasicEmail" className="p-2">
+                    <Form.Label>Measurements </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter measurements"
+                      name="measurements"
+                      value={formik.values.measurements}
+                      min="0"
+                      onChange={formik.handleChange}
+                      isInvalid={
+                        formik.touched.measurements &&
+                        formik.errors.measurements
+                      }
+                    />
+                    <Form.Text className="text-danger">
+                      {formik.touched.measurements &&
+                      formik.errors.measurements ? (
+                        <div className="text-danger">
+                          {formik.errors.measurements}
+                        </div>
+                      ) : null}
+                    </Form.Text>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <></>
               <Col>
                 <Form.Group controlId="formBasicEmail" className="p-2">
                   <Form.Label>BHK </Form.Label>
@@ -193,7 +267,35 @@ function PropertyEdit() {
                 </Form.Group>
               </Col>
             </Row>
-
+            <Form.Group className="p-2" controlId="formBasicEmail">
+              <Row>
+                <Form.Label>Documents or Photos of Your Property</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="documents"
+                  // value={formik.values.documents}
+                  placeholder="Max Size 15"
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.documents && formik.errors.documents
+                  }
+                  // as="textarea"
+                  // aria-label="With textarea"
+                  // placeholder="Write Here"
+                  // onChange={formik.handleChange}
+                  // isInvalid={
+                  //   formik.touched.description && formik.errors.description
+                  // }
+                />
+                {/* <Form.Control type="" placeholder="Enter description" /> */}
+                <Form.Text className="text-danger">
+                  {formik.touched.documents && formik.errors.documents ? (
+                    <div className="text-danger">{formik.errors.documents}</div>
+                  ) : null}
+                </Form.Text>
+                {/* </Form.Group> */}
+              </Row>
+            </Form.Group>
             <Form.Group>
               <Row>
                 <Col>
@@ -257,7 +359,48 @@ function PropertyEdit() {
                 ) : null}
               </Form.Text>
             </Form.Group>
-
+            <Form.Group controlId="formBasicEmail" className="p-2">
+              <Form.Label>Address Line 1 </Form.Label>
+              <Form.Control
+                as="textarea"
+                name="addressline1"
+                value={formik.values.addressline1}
+                aria-label="With textarea"
+                placeholder="Enter Address"
+                onChange={formik.handleChange}
+                isInvalid={
+                  formik.touched.addressline1 && formik.errors.addressline1
+                }
+              />
+              <Form.Text className="text-danger">
+                {formik.touched.addressline1 && formik.errors.addressline1 ? (
+                  <div className="text-danger">
+                    {formik.errors.addressline1}
+                  </div>
+                ) : null}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail" className="p-2">
+              <Form.Label>Address Line 2 </Form.Label>
+              <Form.Control
+                as="textarea"
+                name="addressline2"
+                value={formik.values.addressline2}
+                aria-label="With textarea"
+                placeholder="Enter Address"
+                onChange={formik.handleChange}
+                isInvalid={
+                  formik.touched.addressline2 && formik.errors.addressline2
+                }
+              />
+              <Form.Text className="text-danger">
+                {formik.touched.addressline2 && formik.errors.addressline2 ? (
+                  <div className="text-danger">
+                    {formik.errors.addressline2}
+                  </div>
+                ) : null}
+              </Form.Text>
+            </Form.Group>
             <Form.Group className="p-2" controlId="formBasicEmail">
               <Form.Label>Description of Your Property</Form.Label>
               <Form.Control

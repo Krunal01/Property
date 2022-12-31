@@ -33,6 +33,23 @@
       "addressline2": "nylon colony ",
       "description": "",
       "id": 15
+    },
+    {
+      "ownerName": "kuns",
+      "propertyType": "appartment",
+      "servey_number": "",
+      "bhk": 3,
+      "floor": 3,
+      "measurements": 3,
+      "city": "Surat",
+      "pinCode": 394120,
+      "address": "appartment number ,kosamba",
+      "addressline1": "appartment number ,kosamba",
+      "addressline2": "appartment number ,kosamba",
+      "documents": "C:\\fakepath\\BingImageOfTheDay.jpg",
+      "description": "",
+      "formBasicEmail": "done",
+      "id": 16
     }
   ]
 }

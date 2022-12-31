@@ -56,6 +56,7 @@ function Home() {
                 {e.propertyType} {e.bhk && `| ${e.bhk} BHK`}
               </Card.Header>
               <Card.Body>
+                <Card.Img src={e.documents}></Card.Img>
                 <Card.Title>
                   {e.ownerName} | {e.id}
                 </Card.Title>

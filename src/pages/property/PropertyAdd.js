@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { PROPERTY_TYPES } from "../../utils/data";
 import { useEffect } from "react";
 import axios from "axios";
+import ExtraField from "../../components/ExtraField";
 function PropertyAdd() {
   const formik = useFormik({
     initialValues: {
@@ -17,6 +18,8 @@ function PropertyAdd() {
       propertyType: "",
       servey_number: "",
       bhk: "1",
+      floor: "1",
+      measurements: "0",
       city: "",
       pinCode: "",
       address: "",
@@ -40,6 +43,18 @@ function PropertyAdd() {
         then: Yup.number(),
         otherwise: Yup.number(),
       }),
+      floor: Yup.number().when("propertyType", {
+        is: (type) => {
+          console.log(type);
+
+          return type == "plot" || type == "farm";
+        },
+        then: Yup.number(),
+        otherwise: Yup.number(),
+      }),
+      measurements: Yup.number()
+        // .min(0)
+        .required("Please enter measurements of property"),
       servey_number: Yup.string().when("propertyType", {
         is: (type) => {
           console.log(type);
@@ -178,53 +193,63 @@ function PropertyAdd() {
                   </Form.Text>
                 </Form.Group>
               </Col>
+            </Row>
+            <Row>
               <Col>
-                {formik.values.propertyType === "farm" ? (
-                  <Form.Group controlId="formBasicEmail" className="p-2">
-                    <Form.Label>Servey Number </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter Servey Number"
-                      name="servey_number"
-                      value={formik.values.servey_number}
-                      onChange={formik.handleChange}
-                      isInvalid={
-                        formik.touched.servey_number &&
-                        formik.errors.servey_number
-                      }
-                    />
-                    <Form.Text className="text-danger">
-                      {formik.touched.servey_number &&
-                      formik.errors.servey_number ? (
-                        <div className="text-danger">
-                          {formik.errors.servey_number}
-                        </div>
-                      ) : null}
-                    </Form.Text>
-                  </Form.Group>
-                ) : (
-                  <Form.Group controlId="formBasicEmail" className="p-2">
-                    <Form.Label>BHK </Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter BHK"
-                      name="bhk"
-                      value={formik.values.bhk}
-                      onChange={formik.handleChange}
-                      isInvalid={formik.touched.bhk && formik.errors.bhk}
-                    />
-                    <Form.Text className="text-danger">
-                      {formik.touched.bhk && formik.errors.bhk ? (
-                        <div className="text-danger">{formik.errors.bhk}</div>
-                      ) : null}
-                    </Form.Text>
-                  </Form.Group>
-                )}
+                <ExtraField
+                  propertyType={formik.values.propertyType}
+                  formik={formik}
+                />
 
-                {/* </Row> */}
+                <Form.Group controlId="formBasicEmail" className="p-2">
+                  <Form.Label>Measurements </Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter measurements"
+                    name="measurements"
+                    value={formik.values.measurements}
+                    min="0"
+                    onChange={formik.handleChange}
+                    isInvalid={
+                      formik.touched.measurements && formik.errors.measurements
+                    }
+                  />
+                  <Form.Text className="text-danger">
+                    {formik.touched.measurements &&
+                    formik.errors.measurements ? (
+                      <div className="text-danger">
+                        {formik.errors.measurements}
+                      </div>
+                    ) : null}
+                  </Form.Text>
+                </Form.Group>
               </Col>
             </Row>
-
+            <Form.Group className="p-2" controlId="formBasicEmail">
+              <Form.Label>Documents or Photos of Your Property</Form.Label>
+              <Form.Control
+                type="file"
+                name="documents"
+                value={formik.values.documents}
+                placeholder="Max Size 15"
+                onChange={formik.handleChange}
+                isInvalid={formik.touched.documents && formik.errors.documents}
+                // as="textarea"
+                // aria-label="With textarea"
+                // placeholder="Write Here"
+                // onChange={formik.handleChange}
+                // isInvalid={
+                //   formik.touched.description && formik.errors.description
+                // }
+              />
+              {/* <Form.Control type="" placeholder="Enter description" /> */}
+              <Form.Text className="text-danger">
+                {formik.touched.documents && formik.errors.documents ? (
+                  <div className="text-danger">{formik.errors.documents}</div>
+                ) : null}
+              </Form.Text>
+              {/* </Form.Group> */}
+            </Form.Group>
             <Form.Group>
               <Row>
                 <Col>
@@ -334,31 +359,6 @@ function PropertyAdd() {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="p-2" controlId="formBasicEmail">
-              <Form.Label>Documents or Photos of Your Property</Form.Label>
-              <Form.Control
-                type="file"
-                name="documents"
-                value={formik.values.documents}
-                placeholder="Max Size 15"
-                onChange={formik.handleChange}
-                isInvalid={formik.touched.documents && formik.errors.documents}
-                // as="textarea"
-                // aria-label="With textarea"
-                // placeholder="Write Here"
-                // onChange={formik.handleChange}
-                // isInvalid={
-                //   formik.touched.description && formik.errors.description
-                // }
-              />
-              {/* <Form.Control type="" placeholder="Enter description" /> */}
-              <Form.Text className="text-danger">
-                {formik.touched.description && formik.errors.description ? (
-                  <div className="text-danger">{formik.errors.description}</div>
-                ) : null}
-              </Form.Text>
-              {/* </Form.Group> */}
-            </Form.Group>
             <Form.Group className="p-2" controlId="formBasicEmail">
               <Form.Label>Description of Your Property</Form.Label>
               <Form.Control
