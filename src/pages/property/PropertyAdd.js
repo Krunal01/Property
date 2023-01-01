@@ -43,6 +43,7 @@ function PropertyAdd() {
         then: Yup.number(),
         otherwise: Yup.number(),
       }),
+      // floor: Yup.string().required("Please select"), 
       floor: Yup.number().when("propertyType", {
         is: (type) => {
           console.log(type);
