@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, FormGroup, Row } from "react-bootstrap";
 
 function ExtraField({ propertyType, formik }) {
   //   const formik = useFormik();
@@ -72,7 +72,7 @@ function ExtraField({ propertyType, formik }) {
               <Form.Label>Floors</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="Enter floor detail"
+                placeholder="Enter Floor Number"
                 name="floor"
                 min="1"
                 value={formik.values.floor}
@@ -93,7 +93,7 @@ function ExtraField({ propertyType, formik }) {
               <Form.Label>On Which Floor?</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="Enter floor number"
+                placeholder="Enter Floor Number"
                 name="floor"
                 min="1"
                 value={formik.values.floor}
@@ -120,8 +120,8 @@ function ExtraField({ propertyType, formik }) {
                 required
               >
                 <option>select</option>
-                <option>Yes</option>
-                <option>No</option>
+                <option>YES</option>
+                <option>NO</option>
               </Form.Select>
               <Form.Text className="text-danger">
                 {formik.touched.floor && formik.errors.floor ? (
@@ -160,7 +160,7 @@ function ExtraField({ propertyType, formik }) {
               <Form.Label>Floors</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="Enter floor detail"
+                placeholder="Enter Floor Number"
                 name="floor"
                 min="1"
                 value={formik.values.floor}
@@ -183,7 +183,7 @@ function ExtraField({ propertyType, formik }) {
               <Form.Label>On Which Floor?</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="Enter floor number"
+                placeholder="Enter Floor Number"
                 name="floor"
                 min="1"
                 value={formik.values.floor}
@@ -210,8 +210,8 @@ function ExtraField({ propertyType, formik }) {
                 required
               >
                 <option>select</option>
-                <option>Yes</option>
-                <option>No</option>
+                <option>YES</option>
+                <option>NO</option>
               </Form.Select>
               <Form.Text className="text-danger">
                 {formik.touched.floor && formik.errors.floor ? (
@@ -243,12 +243,32 @@ function ExtraField({ propertyType, formik }) {
               ) : null}
             </Form.Text>
           </Col>
-          {/* <Form.Group controlId="formBasicEmail" className="p-2"> */}
+          <Col>
+            <Form.Label>Is On Ground Floor?</Form.Label>
+
+            <Form.Select
+              isInvalid={
+                formik.touched.propertyType && formik.errors.propertyType
+              }
+              name="propertyType"
+              onChange={formik.handleChange}
+              required
+            >
+              <option>select</option>
+              <option>YES</option>
+              <option>NO</option>
+            </Form.Select>
+            <Form.Text className="text-danger">
+              {formik.touched.floor && formik.errors.floor ? (
+                <div className="text-danger">{formik.errors.floor}</div>
+              ) : null}
+            </Form.Text>
+          </Col>
           <Col>
             <Form.Label>Floors</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Enter floor detail"
+              placeholder="Enter Floor Number"
               name="floor"
               min="1"
               value={formik.values.floor}
@@ -270,6 +290,9 @@ function ExtraField({ propertyType, formik }) {
 
 export default ExtraField;
 {
+  {
+    /* <Form.Group controlId="formBasicEmail" className="p-2"> */
+  }
   /* <Form.Control
                 type="text"
                 placeholder="yes/no"
