@@ -69,7 +69,26 @@ function ExtraField({ propertyType, formik }) {
           </Col>
           <Col>
             <Form.Group controlId="formBasicEmail" className="p-2">
-              <Form.Label>Floors</Form.Label>
+              <Form.Label>Is On Ground Floor?</Form.Label>
+
+              <Form.Select
+                isInvalid={
+                  formik.touched.propertyType && formik.errors.propertyType
+                }
+                name="isongroundfloor"
+                onChange={formik.handleChange}
+                required
+              >
+                <option>select</option>
+                <option>YES</option>
+                <option>NO</option>
+              </Form.Select>
+              <Form.Text className="text-danger">
+                {formik.touched.floor && formik.errors.floor ? (
+                  <div className="text-danger">{formik.errors.floor}</div>
+                ) : null}
+              </Form.Text>
+              {/* <Form.Label>Floors</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter Floor Number"
@@ -83,7 +102,7 @@ function ExtraField({ propertyType, formik }) {
                 {formik.touched.floor && formik.errors.floor ? (
                   <div className="text-danger">{formik.errors.floor}</div>
                 ) : null}
-              </Form.Text>
+              </Form.Text> */}
             </Form.Group>
           </Col>
         </Row>
@@ -108,27 +127,44 @@ function ExtraField({ propertyType, formik }) {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="formBasicEmail" className="p-2">
-              <Form.Label>Is On Ground Floor?</Form.Label>
+            {/* <Form.Label>Is On Ground Floor?</Form.Label>
 
-              <Form.Select
-                isInvalid={
-                  formik.touched.propertyType && formik.errors.propertyType
+<Form.Select
+isInvalid={
+  formik.touched.propertyType && formik.errors.propertyType
                 }
                 name="propertyType"
                 onChange={formik.handleChange}
                 required
-              >
+                >
                 <option>select</option>
                 <option>YES</option>
                 <option>NO</option>
-              </Form.Select>
-              <Form.Text className="text-danger">
+                </Form.Select>
+                <Form.Text className="text-danger">
                 {formik.touched.floor && formik.errors.floor ? (
                   <div className="text-danger">{formik.errors.floor}</div>
                 ) : null}
-              </Form.Text>
-            </Form.Group>
+              </Form.Text> */}
+            {formik.values.isongroundfloor == "NO" && (
+              <Form.Group controlId="formBasicEmail" className="p-2">
+                <Form.Label>Floors</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter Floor Number"
+                  name="floor"
+                  min="1"
+                  value={formik.values.floor}
+                  onChange={formik.handleChange}
+                  isInvalid={formik.touched.floor && formik.errors.floor}
+                />
+                <Form.Text className="text-danger">
+                  {formik.touched.floor && formik.errors.floor ? (
+                    <div className="text-danger">{formik.errors.floor}</div>
+                  ) : null}
+                </Form.Text>
+              </Form.Group>
+            )}
           </Col>
         </Row>
       </>
@@ -157,7 +193,31 @@ function ExtraField({ propertyType, formik }) {
           </Col>
           <Col>
             <Form.Group controlId="formBasicEmail" className="p-2">
-              <Form.Label>Floors</Form.Label>
+              <Form.Label>Is On Ground Floor?</Form.Label>
+
+              <Form.Select
+                isInvalid={
+                  formik.touched.isongroundfloor &&
+                  formik.errors.isongroundfloor
+                }
+                name="isongroundfloor"
+                onChange={formik.handleChange}
+                required
+              >
+                <option>select</option>
+                <option>YES</option>
+                <option>NO</option>
+                {console.log(formik.values)}
+              </Form.Select>
+              <Form.Text className="text-danger">
+                {formik.touched.isongroundfloor &&
+                formik.errors.isongroundfloor ? (
+                  <div className="text-danger">
+                    {formik.errors.isongroundfloor}
+                  </div>
+                ) : null}
+              </Form.Text>
+              {/* <Form.Label>Floors</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter Floor Number"
@@ -168,12 +228,12 @@ function ExtraField({ propertyType, formik }) {
                 isInvalid={formik.touched.floor && formik.errors.floor}
               />
               <Form.Text className="text-danger">
-                {/* <Col> */}
                 {formik.touched.floor && formik.errors.floor ? (
                   <div className="text-danger">{formik.errors.floor}</div>
-                ) : null}
-              </Form.Text>
+                  ) : null}
+              </Form.Text> */}
             </Form.Group>
+            {/* <Col> */}
             {/* </Col> */}
           </Col>
         </Row>
@@ -197,27 +257,46 @@ function ExtraField({ propertyType, formik }) {
               </Form.Text>
             </Form.Group>
           </Col>
-          <Col>
-            <Form.Group controlId="formBasicEmail" className="p-2">
-              <Form.Label>Is On Ground Floor?</Form.Label>
+          {/* <Form.Label>Is On Ground Floor?</Form.Label>
 
-              <Form.Select
-                isInvalid={
-                  formik.touched.propertyType && formik.errors.propertyType
-                }
+<Form.Select
+              isInvalid={
+                formik.touched.propertyType && formik.errors.propertyType
+              }
                 name="propertyType"
                 onChange={formik.handleChange}
                 required
-              >
+                >
                 <option>select</option>
                 <option>YES</option>
                 <option>NO</option>
-              </Form.Select>
-              <Form.Text className="text-danger">
+                </Form.Select>
+                <Form.Text className="text-danger">
                 {formik.touched.floor && formik.errors.floor ? (
                   <div className="text-danger">{formik.errors.floor}</div>
-                ) : null}
-              </Form.Text>
+                  ) : null}
+                </Form.Text> */}
+          <Col>
+            <Form.Group controlId="formBasicEmail" className="p-2">
+              {formik.values.isongroundfloor == "NO" && (
+                <Form.Group controlId="formBasicEmail" className="p-2">
+                  <Form.Label>Floors</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Floor Number"
+                    name="floor"
+                    min="1"
+                    value={formik.values.floor}
+                    onChange={formik.handleChange}
+                    isInvalid={formik.touched.floor && formik.errors.floor}
+                  />
+                  <Form.Text className="text-danger">
+                    {formik.touched.floor && formik.errors.floor ? (
+                      <div className="text-danger">{formik.errors.floor}</div>
+                    ) : null}
+                  </Form.Text>
+                </Form.Group>
+              )}
             </Form.Group>
           </Col>
         </Row>
@@ -248,9 +327,9 @@ function ExtraField({ propertyType, formik }) {
 
             <Form.Select
               isInvalid={
-                formik.touched.propertyType && formik.errors.propertyType
+                formik.touched.isongroundfloor && formik.errors.isongroundfloor
               }
-              name="propertyType"
+              name="isongroundfloor"
               onChange={formik.handleChange}
               required
             >
@@ -265,23 +344,29 @@ function ExtraField({ propertyType, formik }) {
             </Form.Text>
           </Col>
           <Col>
-            <Form.Label>Floors</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter Floor Number"
-              name="floor"
-              min="1"
-              value={formik.values.floor}
-              onChange={formik.handleChange}
-              isInvalid={formik.touched.floor && formik.errors.floor}
-            />
-            <Form.Text className="text-danger">
-              {formik.touched.floor && formik.errors.floor ? (
-                <div className="text-danger">{formik.errors.floor}</div>
-              ) : null}
-            </Form.Text>
-            {/* </Form.Group> */}
+            <Form.Group controlId="formBasicEmail" className="p-2">
+              {formik.values.isongroundfloor == "NO" && (
+                <Form.Group controlId="formBasicEmail" className="p-2">
+                  <Form.Label>Floors</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Floor Number"
+                    name="floor"
+                    min="1"
+                    value={formik.values.floor}
+                    onChange={formik.handleChange}
+                    isInvalid={formik.touched.floor && formik.errors.floor}
+                  />
+                  <Form.Text className="text-danger">
+                    {formik.touched.floor && formik.errors.floor ? (
+                      <div className="text-danger">{formik.errors.floor}</div>
+                    ) : null}
+                  </Form.Text>
+                </Form.Group>
+              )}
+            </Form.Group>
           </Col>
+          {/* </Form.Group> */}
         </Row>
       </Form.Group>
     );

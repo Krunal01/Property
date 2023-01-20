@@ -47,6 +47,40 @@
       "addressline1": "GUJARATGUJARATGUJARAT",
       "addressline2": "INDIAINDIAINDIA",
       "formBasicEmail": "HELLO EDITOR"
+    },
+    {
+      "ownerName": "jems parmar",
+      "propertyType": "home",
+      "servey_number": "",
+      "bhk": 3,
+      "floor": "1",
+      "measurements": 24,
+      "city": "Surat",
+      "pinCode": 394120,
+      "address": "ksb,huj,surat",
+      "addressline1": "ksb,huj,surat",
+      "addressline2": "ksb,huj,surat",
+      "documents": "C:\\fakepath\\BingImageOfTheDay.jpg",
+      "description": "",
+      "formBasicEmail": "abcdefghi",
+      "id": 17
+    },
+    {
+      "ownerName": "sherlok homes",
+      "propertyType": "farm",
+      "servey_number": "214A",
+      "bhk": "1",
+      "floor": "1",
+      "measurements": 24,
+      "city": "Surat",
+      "pinCode": 394120,
+      "address": "ksb,huj,surat",
+      "addressline1": "ksb,huj,surat",
+      "addressline2": "ksb,huj,surat",
+      "documents": "C:\\fakepath\\BingImageOfTheDay_20211101.jpg",
+      "description": "",
+      "formBasicEmail": "abcdefghi",
+      "id": 18
     }
   ]
 }

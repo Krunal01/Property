@@ -53,7 +53,8 @@ function Home() {
           <Col xs="12" sm="6" md="4" lg="3" xl="3" xxl="3" key={e.id}>
             <Card className="d-flex align-items-stretch h-100">
               <Card.Header>
-                {e.propertyType} {e.bhk && `| ${e.bhk} BHK`}
+                {e.propertyType}{" "}
+                {/* {e.bhk && e.propertyType == "home" ? `${e.bhk} | BHK` : e.farm} */}
               </Card.Header>
               <Card.Body>
                 <Card.Img src={e.documents}></Card.Img>
