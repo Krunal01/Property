@@ -46,8 +46,6 @@ function PropertyAdd() {
       // floor: Yup.string().required("Please select"),
       floor: Yup.number().when("propertyType", {
         is: (type) => {
-          console.log(type);
-
           return type == "plot" || type == "farm";
         },
         then: Yup.number(),
@@ -112,7 +110,6 @@ function PropertyAdd() {
   useEffect(() => {
     console.log(formik.values.pinCode);
     if (formik.values.pinCode.toString().length === 6) {
-      console.log("====================================");
       getCityDetails(formik.values.pinCode);
     }
   }, [formik.values.pinCode]);

@@ -207,7 +207,6 @@ isInvalid={
                 <option>select</option>
                 <option>YES</option>
                 <option>NO</option>
-                {console.log(formik.values)}
               </Form.Select>
               <Form.Text className="text-danger">
                 {formik.touched.isongroundfloor &&
