@@ -3,21 +3,17 @@ import { Button, Card, Col, Container, Row, Toast } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../utils/api";
-// import { properties } from "../../utils/data";
 
 function Home() {
   const [properties, setProperties] = useState([]);
   const fetchData = async () => {
     try {
-      // throw new ("hi");
       const response = await api.get("/properties");
       if (response.status === 200) {
         setProperties(response?.data || []);
       }
     } catch (error) {
-      // console.log(error.message);
       toast.error(error?.response?.data?.message || error.message);
-      // toast("data not fetched");
     }
   };
 
@@ -28,24 +24,12 @@ function Home() {
   const removeEntry = async (id) => {
     try {
       const removedData = await api.delete(`/properties/${id}`);
-      // setProperties(removedData);
-      console.log(removedData);
       toast.success("Property data has been deleted.");
       fetchData();
     } catch (error) {
-      console.log(error);
       toast.error("Property data not deleted");
     }
-    console.log(id);
   };
-  const valueforUpdate = (id) => {
-    console.log("====================================");
-    console.log(id);
-    console.log("====================================");
-  };
-  // onSubmit: (values) => {
-  //   editProperty(values);
-  // };
   return (
     <Container fluid className="py-3">
       <Row className="gy-3">
@@ -54,7 +38,7 @@ function Home() {
             <Card className="d-flex align-items-stretch h-100">
               <Card.Header>
                 {e.propertyType}{" "}
-                {/* {e.bhk && e.propertyType == "home" ? `${e.bhk} | BHK` : e.farm} */}
+                {e.bhk && e.propertyType == "home" ? `${e.bhk} | BHK` : e.farm}
               </Card.Header>
               <Card.Body>
                 <Card.Img src={e.documents}></Card.Img>
