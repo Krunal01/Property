@@ -8,10 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { PROPERTY_TYPES } from "../../utils/data";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ExtraField from "../../components/ExtraField";
 function PropertyAdd() {
+  const [fileObjUrl, setFileObjUrl] = useState("");
   const formik = useFormik({
     initialValues: {
       ownerName: "",
@@ -36,8 +37,6 @@ function PropertyAdd() {
       propertyType: Yup.string().required("Please select property type"),
       bhk: Yup.number().when("propertyType", {
         is: (type) => {
-          console.log(type);
-
           return type == "plot" || type == "farm";
         },
         then: Yup.number(),
@@ -56,8 +55,6 @@ function PropertyAdd() {
         .required("Please enter measurements of property"),
       servey_number: Yup.string().when("propertyType", {
         is: (type) => {
-          console.log(type);
-
           return type == "plot" || type == "farm";
         },
         then: Yup.string(),
@@ -87,16 +84,21 @@ function PropertyAdd() {
       ),
       description: Yup.string(),
     }),
-    onSubmit: (values) => createProperty(values),
+    onSubmit: (values) => allData(values),
     enableReinitialize: true,
     validateOnChange: true,
   });
+  function allData(values) {
+    const obj = { ...values, documents: fileObjUrl };
+    // console.log(obj);
+    createProperty(obj);
+  }
   async function getCityDetails(pinCode) {
     try {
       const response = await axios.get(
         `https://api.postalpincode.in/pincode/${pinCode}`
       );
-      console.log(response);
+
       formik.setFieldValue("city", response.data[0].PostOffice[0].Division);
       // formik.setFieldValue("addressline1", response.data[0].PostOffice[1].Name);
       // formik.setFieldValue(
@@ -108,7 +110,6 @@ function PropertyAdd() {
     }
   }
   useEffect(() => {
-    console.log(formik.values.pinCode);
     if (formik.values.pinCode.toString().length === 6) {
       getCityDetails(formik.values.pinCode);
     }
@@ -116,6 +117,9 @@ function PropertyAdd() {
 
   const navigate = useNavigate();
   const createProperty = async (payload) => {
+    // const { documents } = payload;
+    // const objUrl = URL.createObjectURL(documents);
+    // console.log(objUrl);
     try {
       const response = await api.post("/properties", payload);
       if (response.status === 201) {
@@ -132,6 +136,15 @@ function PropertyAdd() {
   };
   const updateProperty = (e) => {
     console.log(e);
+  };
+  const handleFileChange = (e) => {
+    const SelectedFile = e.target.files[0];
+    if (SelectedFile) {
+      const fileObjUrl = URL.createObjectURL(SelectedFile);
+      console.log(fileObjUrl);
+      setFileObjUrl(fileObjUrl);
+    }
+    formik.handleChange(e);
   };
   return (
     <Container
@@ -174,8 +187,10 @@ function PropertyAdd() {
                     onChange={formik.handleChange}
                   >
                     <option>select property</option>
-                    {PROPERTY_TYPES.map(({ label, value }) => (
-                      <option value={value}>{label}</option>
+                    {PROPERTY_TYPES.map(({ label, value }, i) => (
+                      <option value={value} key={i}>
+                        {label}
+                      </option>
                     ))}
                     {/* <option>Home</option>
                     <option>Farm</option>
@@ -230,7 +245,8 @@ function PropertyAdd() {
                 name="documents"
                 value={formik.values.documents}
                 placeholder="Max Size 15"
-                onChange={formik.handleChange}
+                // onChange={formik.handleChange}
+                onChange={(e) => handleFileChange(e)}
                 isInvalid={formik.touched.documents && formik.errors.documents}
                 // as="textarea"
                 // aria-label="With textarea"

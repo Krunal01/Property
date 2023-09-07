@@ -1,86 +1,21 @@
 {
   "properties": [
     {
-      "ownerName": "hi",
-      "propertyType": "farm",
-      "bhk": "1",
-      "city": "surat",
-      "pinCode": 123454,
-      "address": "dlknlkdnlskdnlk",
-      "description": "",
-      "formBasicEmail": "write",
-      "id": 13
-    },
-    {
-      "ownerName": "hi",
-      "propertyType": "farm",
-      "bhk": "1",
-      "city": "Surat",
-      "pinCode": 394120,
-      "address": "kim------------",
-      "description": "",
-      "formBasicEmail": "ok......",
-      "id": 14
-    },
-    {
-      "ownerName": "kp",
-      "propertyType": "home",
-      "bhk": 2,
-      "city": "Surat",
-      "pinCode": 394120,
-      "address": "nylon colony ",
-      "addressline1": "nylon colony ",
-      "addressline2": "nylon colony ",
-      "description": "",
-      "id": 15
-    },
-    {
-      "id": 16,
-      "ownerName": "KUNS",
+      "ownerName": "Elvee",
       "propertyType": "plot",
-      "servey_number": 109,
-      "measurements": 12,
-      "documents": "C:\\fakepath\\BingImageOfTheDay_20211109.jpg",
-      "city": "Surat",
-      "pinCode": 394120,
-      "address": "KOSAMBAKOSAMBAKOSAMBA",
-      "addressline1": "GUJARATGUJARATGUJARAT",
-      "addressline2": "INDIAINDIAINDIA",
-      "formBasicEmail": "HELLO EDITOR"
-    },
-    {
-      "ownerName": "jems parmar",
-      "propertyType": "home",
-      "servey_number": "",
-      "bhk": 3,
-      "floor": "1",
-      "measurements": 24,
-      "city": "Surat",
-      "pinCode": 394120,
-      "address": "ksb,huj,surat",
-      "addressline1": "ksb,huj,surat",
-      "addressline2": "ksb,huj,surat",
-      "documents": "C:\\fakepath\\BingImageOfTheDay.jpg",
-      "description": "",
-      "formBasicEmail": "abcdefghi",
-      "id": 17
-    },
-    {
-      "ownerName": "sherlok homes",
-      "propertyType": "farm",
-      "servey_number": "214A",
+      "servey_number": 118,
       "bhk": "1",
       "floor": "1",
-      "measurements": 24,
+      "measurements": 7,
       "city": "Surat",
-      "pinCode": 394120,
-      "address": "ksb,huj,surat",
-      "addressline1": "ksb,huj,surat",
-      "addressline2": "ksb,huj,surat",
-      "documents": "C:\\fakepath\\BingImageOfTheDay_20211101.jpg",
+      "pinCode": 394125,
+      "address": "Kumvarda, Kosamba",
+      "addressline1": "KUMVARDA, SURAT",
+      "addressline2": "KUMVARDA, SURAT",
+      "documents": "blob:http://localhost:3000/ffd04764-ea51-4716-bcac-4f25cd74d042",
       "description": "",
-      "formBasicEmail": "abcdefghi",
-      "id": 18
+      "formBasicEmail": "plots",
+      "id": 19
     }
   ]
 }

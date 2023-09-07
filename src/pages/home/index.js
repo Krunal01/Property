@@ -20,7 +20,9 @@ function Home() {
   useEffect(() => {
     fetchData();
   }, []);
-
+  console.log("====================================");
+  console.log(properties);
+  console.log("====================================");
   const removeEntry = async (id) => {
     try {
       const removedData = await api.delete(`/properties/${id}`);
@@ -41,7 +43,8 @@ function Home() {
                 {e.bhk && e.propertyType == "home" ? `${e.bhk} | BHK` : e.farm}
               </Card.Header>
               <Card.Body>
-                <Card.Img src={e.documents}></Card.Img>
+                {console.log(e?.documents)}
+                <Card.Img src={e?.documents} alt="API IMG"></Card.Img>
                 <Card.Title>
                   {e.ownerName} | {e.id}
                 </Card.Title>
